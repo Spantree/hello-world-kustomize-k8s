@@ -37,6 +37,3 @@ yarn-error.log*
 _
 
 client
-
-# SQLite Internal Files
-*-journal

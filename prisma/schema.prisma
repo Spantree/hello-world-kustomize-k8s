@@ -10,9 +10,9 @@ generator client {
 
 // models examples
 model Counter {
-	id String @id
+	id String @id @default(cuid())
 	name String @unique
-	value BigInt
+	value BigInt @default(0)
 	createdAt DateTime @default(now())
 	updatedAt DateTime @updatedAt
 }
