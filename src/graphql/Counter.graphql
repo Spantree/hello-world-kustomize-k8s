@@ -1,0 +1,9 @@
+query GetCounters {
+  counters {
+    id
+    name
+    value
+    createdAt
+    updatedAt
+  }
+}

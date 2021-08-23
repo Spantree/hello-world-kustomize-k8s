@@ -85,10 +85,10 @@ type CounterCountAggregateOutputType {
 
 input CounterCreateInput {
   createdAt: DateTime
-  id: String!
+  id: String
   name: String!
   updatedAt: DateTime
-  value: BigInt!
+  value: BigInt
 }
 
 type CounterMaxAggregateOutputType {
@@ -140,10 +140,10 @@ type CounterSumAggregateOutputType {
 
 input CounterUncheckedCreateInput {
   createdAt: DateTime
-  id: String!
+  id: String
   name: String!
   updatedAt: DateTime
-  value: BigInt!
+  value: BigInt
 }
 
 input CounterUncheckedUpdateInput {
@@ -236,12 +236,12 @@ scalar Decimal
 scalar Json
 
 type Mutation {
-  createOneCounter(data: CounterCreateInput!): Counter!
-  deleteManyCounter(where: CounterWhereInput): BatchPayload!
-  deleteOneCounter(where: CounterWhereUniqueInput!): Counter
-  updateManyCounter(data: CounterUpdateManyMutationInput!, where: CounterWhereInput): BatchPayload!
-  updateOneCounter(data: CounterUpdateInput!, where: CounterWhereUniqueInput!): Counter!
-  upsertOneCounter(create: CounterCreateInput!, update: CounterUpdateInput!, where: CounterWhereUniqueInput!): Counter!
+  createCounter(data: CounterCreateInput!): Counter!
+  deleteCounter(where: CounterWhereUniqueInput!): Counter
+  deleteCounters(where: CounterWhereInput): BatchPayload!
+  updateCounter(data: CounterUpdateInput!, where: CounterWhereUniqueInput!): Counter!
+  updateCounters(data: CounterUpdateManyMutationInput!, where: CounterWhereInput): BatchPayload!
+  upsertCounter(create: CounterCreateInput!, update: CounterUpdateInput!, where: CounterWhereUniqueInput!): Counter!
 }
 
 input NestedBigIntFilter {
@@ -362,10 +362,10 @@ input NestedStringWithAggregatesFilter {
 
 type Query {
   aggregateCounter(cursor: CounterWhereUniqueInput, distinct: CounterScalarFieldEnum, orderBy: [CounterOrderByInput], skip: Int, take: Int, where: CounterWhereInput): AggregateCounter
-  findFirstCounter(cursor: CounterWhereUniqueInput, distinct: CounterScalarFieldEnum, orderBy: [CounterOrderByInput], skip: Int, take: Int, where: CounterWhereInput): Counter
-  findManyCounter(cursor: CounterWhereUniqueInput, distinct: CounterScalarFieldEnum, orderBy: [CounterOrderByInput], skip: Int, take: Int, where: CounterWhereInput): [Counter!]!
-  findManyCounterCount(cursor: CounterWhereUniqueInput, distinct: CounterScalarFieldEnum, orderBy: [CounterOrderByInput], skip: Int, take: Int, where: CounterWhereInput): Int!
-  findUniqueCounter(where: CounterWhereUniqueInput!): Counter
+  counter(where: CounterWhereUniqueInput!): Counter
+  counterCount(cursor: CounterWhereUniqueInput, distinct: CounterScalarFieldEnum, orderBy: [CounterOrderByInput], skip: Int, take: Int, where: CounterWhereInput): Int!
+  counters(cursor: CounterWhereUniqueInput, distinct: CounterScalarFieldEnum, orderBy: [CounterOrderByInput], skip: Int, take: Int, where: CounterWhereInput): [Counter!]!
+  firstCounter(cursor: CounterWhereUniqueInput, distinct: CounterScalarFieldEnum, orderBy: [CounterOrderByInput], skip: Int, take: Int, where: CounterWhereInput): Counter
 }
 
 enum SortOrder {

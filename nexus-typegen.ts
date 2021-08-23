@@ -92,10 +92,10 @@ export interface NexusGenInputs {
   }
   CounterCreateInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    id: string; // String!
+    id?: string | null; // String
     name: string; // String!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    value: NexusGenScalars['BigInt']; // BigInt!
+    value?: NexusGenScalars['BigInt'] | null; // BigInt
   }
   CounterOrderByInput: { // input type
     createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
@@ -116,10 +116,10 @@ export interface NexusGenInputs {
   }
   CounterUncheckedCreateInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    id: string; // String!
+    id?: string | null; // String
     name: string; // String!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    value: NexusGenScalars['BigInt']; // BigInt!
+    value?: NexusGenScalars['BigInt'] | null; // BigInt
   }
   CounterUncheckedUpdateInput: { // input type
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
@@ -471,19 +471,19 @@ export interface NexusGenFieldTypes {
     value: NexusGenScalars['BigInt'] | null; // BigInt
   }
   Mutation: { // field return type
-    createOneCounter: NexusGenRootTypes['Counter']; // Counter!
-    deleteManyCounter: NexusGenRootTypes['BatchPayload']; // BatchPayload!
-    deleteOneCounter: NexusGenRootTypes['Counter'] | null; // Counter
-    updateManyCounter: NexusGenRootTypes['BatchPayload']; // BatchPayload!
-    updateOneCounter: NexusGenRootTypes['Counter']; // Counter!
-    upsertOneCounter: NexusGenRootTypes['Counter']; // Counter!
+    createCounter: NexusGenRootTypes['Counter']; // Counter!
+    deleteCounter: NexusGenRootTypes['Counter'] | null; // Counter
+    deleteCounters: NexusGenRootTypes['BatchPayload']; // BatchPayload!
+    updateCounter: NexusGenRootTypes['Counter']; // Counter!
+    updateCounters: NexusGenRootTypes['BatchPayload']; // BatchPayload!
+    upsertCounter: NexusGenRootTypes['Counter']; // Counter!
   }
   Query: { // field return type
     aggregateCounter: NexusGenRootTypes['AggregateCounter'] | null; // AggregateCounter
-    findFirstCounter: NexusGenRootTypes['Counter'] | null; // Counter
-    findManyCounter: NexusGenRootTypes['Counter'][]; // [Counter!]!
-    findManyCounterCount: number; // Int!
-    findUniqueCounter: NexusGenRootTypes['Counter'] | null; // Counter
+    counter: NexusGenRootTypes['Counter'] | null; // Counter
+    counterCount: number; // Int!
+    counters: NexusGenRootTypes['Counter'][]; // [Counter!]!
+    firstCounter: NexusGenRootTypes['Counter'] | null; // Counter
   }
 }
 
@@ -539,42 +539,42 @@ export interface NexusGenFieldTypeNames {
     value: 'BigInt'
   }
   Mutation: { // field return type name
-    createOneCounter: 'Counter'
-    deleteManyCounter: 'BatchPayload'
-    deleteOneCounter: 'Counter'
-    updateManyCounter: 'BatchPayload'
-    updateOneCounter: 'Counter'
-    upsertOneCounter: 'Counter'
+    createCounter: 'Counter'
+    deleteCounter: 'Counter'
+    deleteCounters: 'BatchPayload'
+    updateCounter: 'Counter'
+    updateCounters: 'BatchPayload'
+    upsertCounter: 'Counter'
   }
   Query: { // field return type name
     aggregateCounter: 'AggregateCounter'
-    findFirstCounter: 'Counter'
-    findManyCounter: 'Counter'
-    findManyCounterCount: 'Int'
-    findUniqueCounter: 'Counter'
+    counter: 'Counter'
+    counterCount: 'Int'
+    counters: 'Counter'
+    firstCounter: 'Counter'
   }
 }
 
 export interface NexusGenArgTypes {
   Mutation: {
-    createOneCounter: { // args
+    createCounter: { // args
       data: NexusGenInputs['CounterCreateInput']; // CounterCreateInput!
     }
-    deleteManyCounter: { // args
-      where?: NexusGenInputs['CounterWhereInput'] | null; // CounterWhereInput
-    }
-    deleteOneCounter: { // args
+    deleteCounter: { // args
       where: NexusGenInputs['CounterWhereUniqueInput']; // CounterWhereUniqueInput!
     }
-    updateManyCounter: { // args
-      data: NexusGenInputs['CounterUpdateManyMutationInput']; // CounterUpdateManyMutationInput!
+    deleteCounters: { // args
       where?: NexusGenInputs['CounterWhereInput'] | null; // CounterWhereInput
     }
-    updateOneCounter: { // args
+    updateCounter: { // args
       data: NexusGenInputs['CounterUpdateInput']; // CounterUpdateInput!
       where: NexusGenInputs['CounterWhereUniqueInput']; // CounterWhereUniqueInput!
     }
-    upsertOneCounter: { // args
+    updateCounters: { // args
+      data: NexusGenInputs['CounterUpdateManyMutationInput']; // CounterUpdateManyMutationInput!
+      where?: NexusGenInputs['CounterWhereInput'] | null; // CounterWhereInput
+    }
+    upsertCounter: { // args
       create: NexusGenInputs['CounterCreateInput']; // CounterCreateInput!
       update: NexusGenInputs['CounterUpdateInput']; // CounterUpdateInput!
       where: NexusGenInputs['CounterWhereUniqueInput']; // CounterWhereUniqueInput!
@@ -589,32 +589,32 @@ export interface NexusGenArgTypes {
       take?: number | null; // Int
       where?: NexusGenInputs['CounterWhereInput'] | null; // CounterWhereInput
     }
-    findFirstCounter: { // args
-      cursor?: NexusGenInputs['CounterWhereUniqueInput'] | null; // CounterWhereUniqueInput
-      distinct?: NexusGenEnums['CounterScalarFieldEnum'] | null; // CounterScalarFieldEnum
-      orderBy?: Array<NexusGenInputs['CounterOrderByInput'] | null> | null; // [CounterOrderByInput]
-      skip?: number | null; // Int
-      take?: number | null; // Int
-      where?: NexusGenInputs['CounterWhereInput'] | null; // CounterWhereInput
-    }
-    findManyCounter: { // args
-      cursor?: NexusGenInputs['CounterWhereUniqueInput'] | null; // CounterWhereUniqueInput
-      distinct?: NexusGenEnums['CounterScalarFieldEnum'] | null; // CounterScalarFieldEnum
-      orderBy?: Array<NexusGenInputs['CounterOrderByInput'] | null> | null; // [CounterOrderByInput]
-      skip?: number | null; // Int
-      take?: number | null; // Int
-      where?: NexusGenInputs['CounterWhereInput'] | null; // CounterWhereInput
-    }
-    findManyCounterCount: { // args
-      cursor?: NexusGenInputs['CounterWhereUniqueInput'] | null; // CounterWhereUniqueInput
-      distinct?: NexusGenEnums['CounterScalarFieldEnum'] | null; // CounterScalarFieldEnum
-      orderBy?: Array<NexusGenInputs['CounterOrderByInput'] | null> | null; // [CounterOrderByInput]
-      skip?: number | null; // Int
-      take?: number | null; // Int
-      where?: NexusGenInputs['CounterWhereInput'] | null; // CounterWhereInput
-    }
-    findUniqueCounter: { // args
+    counter: { // args
       where: NexusGenInputs['CounterWhereUniqueInput']; // CounterWhereUniqueInput!
+    }
+    counterCount: { // args
+      cursor?: NexusGenInputs['CounterWhereUniqueInput'] | null; // CounterWhereUniqueInput
+      distinct?: NexusGenEnums['CounterScalarFieldEnum'] | null; // CounterScalarFieldEnum
+      orderBy?: Array<NexusGenInputs['CounterOrderByInput'] | null> | null; // [CounterOrderByInput]
+      skip?: number | null; // Int
+      take?: number | null; // Int
+      where?: NexusGenInputs['CounterWhereInput'] | null; // CounterWhereInput
+    }
+    counters: { // args
+      cursor?: NexusGenInputs['CounterWhereUniqueInput'] | null; // CounterWhereUniqueInput
+      distinct?: NexusGenEnums['CounterScalarFieldEnum'] | null; // CounterScalarFieldEnum
+      orderBy?: Array<NexusGenInputs['CounterOrderByInput'] | null> | null; // [CounterOrderByInput]
+      skip?: number | null; // Int
+      take?: number | null; // Int
+      where?: NexusGenInputs['CounterWhereInput'] | null; // CounterWhereInput
+    }
+    firstCounter: { // args
+      cursor?: NexusGenInputs['CounterWhereUniqueInput'] | null; // CounterWhereUniqueInput
+      distinct?: NexusGenEnums['CounterScalarFieldEnum'] | null; // CounterScalarFieldEnum
+      orderBy?: Array<NexusGenInputs['CounterOrderByInput'] | null> | null; // [CounterOrderByInput]
+      skip?: number | null; // Int
+      take?: number | null; // Int
+      where?: NexusGenInputs['CounterWhereInput'] | null; // CounterWhereInput
     }
   }
 }

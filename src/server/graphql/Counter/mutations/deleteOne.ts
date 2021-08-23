@@ -1,6 +1,6 @@
 import { mutationField, nonNull } from 'nexus'
 
-export const CounterDeleteOneMutation = mutationField('deleteOneCounter', {
+export const CounterDeleteOneMutation = mutationField('deleteCounter', {
   type: 'Counter',
   args: {
     where: nonNull('CounterWhereUniqueInput'),

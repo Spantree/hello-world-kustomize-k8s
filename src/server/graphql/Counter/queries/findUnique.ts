@@ -1,6 +1,6 @@
 import { queryField, nonNull } from 'nexus'
 
-export const CounterFindUniqueQuery = queryField('findUniqueCounter', {
+export const CounterFindUniqueQuery = queryField('counter', {
   type: 'Counter',
   args: {
     where: nonNull('CounterWhereUniqueInput'),

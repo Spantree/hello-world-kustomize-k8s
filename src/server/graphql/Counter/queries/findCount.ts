@@ -1,6 +1,6 @@
 import { queryField, nonNull, list } from 'nexus'
 
-export const CounterFindCountQuery = queryField('findManyCounterCount', {
+export const CounterFindCountQuery = queryField('counterCount', {
   type: nonNull('Int'),
   args: {
     where: 'CounterWhereInput',

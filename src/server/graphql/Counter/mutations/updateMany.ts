@@ -1,6 +1,6 @@
 import { mutationField, nonNull } from 'nexus'
 
-export const CounterUpdateManyMutation = mutationField('updateManyCounter', {
+export const CounterUpdateManyMutation = mutationField('updateCounters', {
   type: nonNull('BatchPayload'),
   args: {
     where: 'CounterWhereInput',
