@@ -6,10 +6,10 @@ build:
       context: .
   tagPolicy:
     customTemplate:
-      template: '0.1.1'
+      template: '0.1.2-SNAPSHOT'
   local:
     push: true
-# deploy:
-#   kustomize:
-#     paths:
-#       - ./kustomize/base
+deploy:
+  kustomize:
+    paths:
+      - ./kustomize/base
