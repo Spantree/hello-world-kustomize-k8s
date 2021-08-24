@@ -1,3 +1,4 @@
+import { UserInputError } from 'apollo-server-micro'
 import { queryField, nonNull, list } from 'nexus'
 
 export const CounterFindManyQuery = queryField('counters', {

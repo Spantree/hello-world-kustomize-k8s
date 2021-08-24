@@ -407,6 +407,10 @@ export interface NexusGenObjects {
   }
   Mutation: {};
   Query: {};
+  SystemInfo: { // root type
+    databaseType?: string | null; // String
+    env?: NexusGenScalars['Json'] | null; // Json
+  }
 }
 
 export interface NexusGenInterfaces {
@@ -472,11 +476,7 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     createCounter: NexusGenRootTypes['Counter']; // Counter!
-    deleteCounter: NexusGenRootTypes['Counter'] | null; // Counter
-    deleteCounters: NexusGenRootTypes['BatchPayload']; // BatchPayload!
-    updateCounter: NexusGenRootTypes['Counter']; // Counter!
-    updateCounters: NexusGenRootTypes['BatchPayload']; // BatchPayload!
-    upsertCounter: NexusGenRootTypes['Counter']; // Counter!
+    incrementCounter: NexusGenRootTypes['Counter'] | null; // Counter
   }
   Query: { // field return type
     aggregateCounter: NexusGenRootTypes['AggregateCounter'] | null; // AggregateCounter
@@ -540,11 +540,7 @@ export interface NexusGenFieldTypeNames {
   }
   Mutation: { // field return type name
     createCounter: 'Counter'
-    deleteCounter: 'Counter'
-    deleteCounters: 'BatchPayload'
-    updateCounter: 'Counter'
-    updateCounters: 'BatchPayload'
-    upsertCounter: 'Counter'
+    incrementCounter: 'Counter'
   }
   Query: { // field return type name
     aggregateCounter: 'AggregateCounter'
@@ -552,6 +548,8 @@ export interface NexusGenFieldTypeNames {
     counterCount: 'Int'
     counters: 'Counter'
     firstCounter: 'Counter'
+    systemInfo: 'SystemInfo'
+  }
   }
 }
 
@@ -560,24 +558,8 @@ export interface NexusGenArgTypes {
     createCounter: { // args
       data: NexusGenInputs['CounterCreateInput']; // CounterCreateInput!
     }
-    deleteCounter: { // args
-      where: NexusGenInputs['CounterWhereUniqueInput']; // CounterWhereUniqueInput!
-    }
-    deleteCounters: { // args
-      where?: NexusGenInputs['CounterWhereInput'] | null; // CounterWhereInput
-    }
-    updateCounter: { // args
-      data: NexusGenInputs['CounterUpdateInput']; // CounterUpdateInput!
-      where: NexusGenInputs['CounterWhereUniqueInput']; // CounterWhereUniqueInput!
-    }
-    updateCounters: { // args
-      data: NexusGenInputs['CounterUpdateManyMutationInput']; // CounterUpdateManyMutationInput!
-      where?: NexusGenInputs['CounterWhereInput'] | null; // CounterWhereInput
-    }
-    upsertCounter: { // args
-      create: NexusGenInputs['CounterCreateInput']; // CounterCreateInput!
-      update: NexusGenInputs['CounterUpdateInput']; // CounterUpdateInput!
-      where: NexusGenInputs['CounterWhereUniqueInput']; // CounterWhereUniqueInput!
+    incrementCounter: { // args
+      id: string; // String!
     }
   }
   Query: {

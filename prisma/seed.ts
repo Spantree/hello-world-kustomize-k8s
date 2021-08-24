@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 const seed = async () => {
-  await prisma.counter.create({ data: { name: 'first-counter' } });
+  await prisma.counter.create({ data: { name: 'The First Counter' } });
 };
 
 seed()

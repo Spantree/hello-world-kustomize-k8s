@@ -258,11 +258,7 @@ export type DateTimeWithAggregatesFilter = {
 export type Mutation = {
   __typename?: 'Mutation';
   createCounter: Counter;
-  deleteCounter?: Maybe<Counter>;
-  deleteCounters: BatchPayload;
-  updateCounter: Counter;
-  updateCounters: BatchPayload;
-  upsertCounter: Counter;
+  incrementCounter?: Maybe<Counter>;
 };
 
 
@@ -271,32 +267,8 @@ export type MutationCreateCounterArgs = {
 };
 
 
-export type MutationDeleteCounterArgs = {
-  where: CounterWhereUniqueInput;
-};
-
-
-export type MutationDeleteCountersArgs = {
-  where?: Maybe<CounterWhereInput>;
-};
-
-
-export type MutationUpdateCounterArgs = {
-  data: CounterUpdateInput;
-  where: CounterWhereUniqueInput;
-};
-
-
-export type MutationUpdateCountersArgs = {
-  data: CounterUpdateManyMutationInput;
-  where?: Maybe<CounterWhereInput>;
-};
-
-
-export type MutationUpsertCounterArgs = {
-  create: CounterCreateInput;
-  update: CounterUpdateInput;
-  where: CounterWhereUniqueInput;
+export type MutationIncrementCounterArgs = {
+  id?: Maybe<Scalars['String']>;
 };
 
 export type NestedBigIntFilter = {
@@ -422,6 +394,7 @@ export type Query = {
   counterCount: Scalars['Int'];
   counters: Array<Counter>;
   firstCounter?: Maybe<Counter>;
+  systemInfo?: Maybe<SystemInfo>;
 };
 
 
@@ -512,47 +485,182 @@ export type StringWithAggregatesFilter = {
   startsWith?: Maybe<Scalars['String']>;
 };
 
-export type GetCountersQueryVariables = Exact<{ [key: string]: never; }>;
+export type SystemInfo = {
+  __typename?: 'SystemInfo';
+  databaseType?: Maybe<Scalars['String']>;
+};
+
+export type CounterDataFragment = { __typename?: 'Counter', id: string, name: string, value: any, createdAt: any, updatedAt: any };
+
+export type GetAllCountersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCountersQuery = { __typename?: 'Query', counters: Array<{ __typename?: 'Counter', id: string, name: string, value: any, createdAt: any, updatedAt: any }> };
+export type GetAllCountersQuery = { __typename?: 'Query', counters: Array<{ __typename?: 'Counter', id: string, name: string, value: any, createdAt: any, updatedAt: any }> };
+
+export type CreateNewCounterMutationVariables = Exact<{
+  data: CounterCreateInput;
+}>;
 
 
-export const GetCountersDocument = gql`
-    query GetCounters {
-  counters {
-    id
-    name
-    value
-    createdAt
-    updatedAt
-  }
+export type CreateNewCounterMutation = { __typename?: 'Mutation', createCounter: { __typename?: 'Counter', id: string, name: string, value: any, createdAt: any, updatedAt: any } };
+
+export type IncrementCounterMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type IncrementCounterMutation = { __typename?: 'Mutation', incrementCounter?: Maybe<{ __typename?: 'Counter', id: string, name: string, value: any, createdAt: any, updatedAt: any }> };
+
+export type SystemInfoDataFragment = { __typename?: 'SystemInfo', databaseType?: Maybe<string> };
+
+export type GetSystemInfoQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetSystemInfoQuery = { __typename?: 'Query', systemInfo?: Maybe<{ __typename?: 'SystemInfo', databaseType?: Maybe<string> }> };
+
+export const CounterDataFragmentDoc = gql`
+    fragment CounterData on Counter {
+  id
+  name
+  value
+  createdAt
+  updatedAt
 }
     `;
+export const SystemInfoDataFragmentDoc = gql`
+    fragment SystemInfoData on SystemInfo {
+  databaseType
+}
+    `;
+export const GetAllCountersDocument = gql`
+    query GetAllCounters {
+  counters {
+    ...CounterData
+  }
+}
+    ${CounterDataFragmentDoc}`;
 
 /**
- * __useGetCountersQuery__
+ * __useGetAllCountersQuery__
  *
- * To run a query within a React component, call `useGetCountersQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetCountersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetAllCountersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllCountersQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetCountersQuery({
+ * const { data, loading, error } = useGetAllCountersQuery({
  *   variables: {
  *   },
  * });
  */
-export function useGetCountersQuery(baseOptions?: Apollo.QueryHookOptions<GetCountersQuery, GetCountersQueryVariables>) {
+export function useGetAllCountersQuery(baseOptions?: Apollo.QueryHookOptions<GetAllCountersQuery, GetAllCountersQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetCountersQuery, GetCountersQueryVariables>(GetCountersDocument, options);
+        return Apollo.useQuery<GetAllCountersQuery, GetAllCountersQueryVariables>(GetAllCountersDocument, options);
       }
-export function useGetCountersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetCountersQuery, GetCountersQueryVariables>) {
+export function useGetAllCountersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllCountersQuery, GetAllCountersQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetCountersQuery, GetCountersQueryVariables>(GetCountersDocument, options);
+          return Apollo.useLazyQuery<GetAllCountersQuery, GetAllCountersQueryVariables>(GetAllCountersDocument, options);
         }
-export type GetCountersQueryHookResult = ReturnType<typeof useGetCountersQuery>;
-export type GetCountersLazyQueryHookResult = ReturnType<typeof useGetCountersLazyQuery>;
-export type GetCountersQueryResult = Apollo.QueryResult<GetCountersQuery, GetCountersQueryVariables>;
+export type GetAllCountersQueryHookResult = ReturnType<typeof useGetAllCountersQuery>;
+export type GetAllCountersLazyQueryHookResult = ReturnType<typeof useGetAllCountersLazyQuery>;
+export type GetAllCountersQueryResult = Apollo.QueryResult<GetAllCountersQuery, GetAllCountersQueryVariables>;
+export const CreateNewCounterDocument = gql`
+    mutation CreateNewCounter($data: CounterCreateInput!) {
+  createCounter(data: $data) {
+    ...CounterData
+  }
+}
+    ${CounterDataFragmentDoc}`;
+
+/**
+ * __useCreateNewCounterMutation__
+ *
+ * To run a mutation, you first call `useCreateNewCounterMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateNewCounterMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createNewCounterMutation, { data, loading, error }] = useCreateNewCounterMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateNewCounterMutation(baseOptions?: Apollo.MutationHookOptions<CreateNewCounterMutation, CreateNewCounterMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateNewCounterMutation, CreateNewCounterMutationVariables>(CreateNewCounterDocument, options);
+      }
+export type CreateNewCounterMutationHookResult = ReturnType<typeof useCreateNewCounterMutation>;
+export type CreateNewCounterMutationResult = Apollo.MutationResult<CreateNewCounterMutation>;
+export type CreateNewCounterMutationOptions = Apollo.BaseMutationOptions<CreateNewCounterMutation, CreateNewCounterMutationVariables>;
+export const IncrementCounterDocument = gql`
+    mutation IncrementCounter($id: String!) {
+  incrementCounter(id: $id) {
+    ...CounterData
+  }
+}
+    ${CounterDataFragmentDoc}`;
+
+/**
+ * __useIncrementCounterMutation__
+ *
+ * To run a mutation, you first call `useIncrementCounterMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useIncrementCounterMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [incrementCounterMutation, { data, loading, error }] = useIncrementCounterMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useIncrementCounterMutation(baseOptions?: Apollo.MutationHookOptions<IncrementCounterMutation, IncrementCounterMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<IncrementCounterMutation, IncrementCounterMutationVariables>(IncrementCounterDocument, options);
+      }
+export type IncrementCounterMutationHookResult = ReturnType<typeof useIncrementCounterMutation>;
+export type IncrementCounterMutationResult = Apollo.MutationResult<IncrementCounterMutation>;
+export type IncrementCounterMutationOptions = Apollo.BaseMutationOptions<IncrementCounterMutation, IncrementCounterMutationVariables>;
+export const GetSystemInfoDocument = gql`
+    query GetSystemInfo {
+  systemInfo {
+    ...SystemInfoData
+  }
+}
+    ${SystemInfoDataFragmentDoc}`;
+
+/**
+ * __useGetSystemInfoQuery__
+ *
+ * To run a query within a React component, call `useGetSystemInfoQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetSystemInfoQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetSystemInfoQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetSystemInfoQuery(baseOptions?: Apollo.QueryHookOptions<GetSystemInfoQuery, GetSystemInfoQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetSystemInfoQuery, GetSystemInfoQueryVariables>(GetSystemInfoDocument, options);
+      }
+export function useGetSystemInfoLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetSystemInfoQuery, GetSystemInfoQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetSystemInfoQuery, GetSystemInfoQueryVariables>(GetSystemInfoDocument, options);
+        }
+export type GetSystemInfoQueryHookResult = ReturnType<typeof useGetSystemInfoQuery>;
+export type GetSystemInfoLazyQueryHookResult = ReturnType<typeof useGetSystemInfoLazyQuery>;
+export type GetSystemInfoQueryResult = Apollo.QueryResult<GetSystemInfoQuery, GetSystemInfoQueryVariables>;

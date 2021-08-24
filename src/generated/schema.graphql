@@ -237,11 +237,7 @@ scalar Json
 
 type Mutation {
   createCounter(data: CounterCreateInput!): Counter!
-  deleteCounter(where: CounterWhereUniqueInput!): Counter
-  deleteCounters(where: CounterWhereInput): BatchPayload!
-  updateCounter(data: CounterUpdateInput!, where: CounterWhereUniqueInput!): Counter!
-  updateCounters(data: CounterUpdateManyMutationInput!, where: CounterWhereInput): BatchPayload!
-  upsertCounter(create: CounterCreateInput!, update: CounterUpdateInput!, where: CounterWhereUniqueInput!): Counter!
+  incrementCounter(id: String!): Counter
 }
 
 input NestedBigIntFilter {
@@ -366,6 +362,7 @@ type Query {
   counterCount(cursor: CounterWhereUniqueInput, distinct: CounterScalarFieldEnum, orderBy: [CounterOrderByInput], skip: Int, take: Int, where: CounterWhereInput): Int!
   counters(cursor: CounterWhereUniqueInput, distinct: CounterScalarFieldEnum, orderBy: [CounterOrderByInput], skip: Int, take: Int, where: CounterWhereInput): [Counter!]!
   firstCounter(cursor: CounterWhereUniqueInput, distinct: CounterScalarFieldEnum, orderBy: [CounterOrderByInput], skip: Int, take: Int, where: CounterWhereInput): Counter
+  systemInfo: SystemInfo
 }
 
 enum SortOrder {
@@ -409,4 +406,9 @@ input StringWithAggregatesFilter {
   not: NestedStringWithAggregatesFilter
   notIn: [String]
   startsWith: String
+}
+
+type SystemInfo {
+  databaseType: String
+  env: Json
 }

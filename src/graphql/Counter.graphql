@@ -1,9 +1,25 @@
-query GetCounters {
+fragment CounterData on Counter {
+  id
+  name
+  value
+  createdAt
+  updatedAt
+}
+
+query GetAllCounters {
   counters {
-    id
-    name
-    value
-    createdAt
-    updatedAt
+    ...CounterData
+  }
+}
+
+mutation CreateNewCounter($data: CounterCreateInput!) {
+  createCounter(data: $data) {
+    ...CounterData
+  }
+}
+
+mutation IncrementCounter($id: String!) {
+  incrementCounter(id: $id) {
+    ...CounterData
   }
 }

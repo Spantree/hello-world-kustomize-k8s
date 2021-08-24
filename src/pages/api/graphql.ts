@@ -1,19 +1,13 @@
+import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { ApolloServer } from 'apollo-server-micro';
-import {
-  ApolloServerPluginLandingPageDisabled,
-  ApolloServerPluginLandingPageGraphQLPlayground,
-} from 'apollo-server-core';
-import { schema } from 'server/nexusSchema';
+import { IncomingMessage, ServerResponse } from 'http';
 import { createContext } from 'server/context';
+import { schema } from 'server/nexusSchema';
 
 const apolloServer = new ApolloServer({
   schema,
   context: createContext,
-  plugins: [
-    process.env.NODE_ENV === 'production'
-      ? ApolloServerPluginLandingPageDisabled()
-      : ApolloServerPluginLandingPageGraphQLPlayground(),
-  ],
+  plugins: [ApolloServerPluginLandingPageLocalDefault()],
 });
 
 export const config = {
@@ -24,9 +18,11 @@ export const config = {
 
 const startServer = apolloServer.start();
 
-export default async function handler(req: any, res: any) {
+const handler = async (req: IncomingMessage, res: ServerResponse) => {
   await startServer;
   await apolloServer.createHandler({
     path: '/api/graphql',
   })(req, res);
-}
+};
+
+export default handler;
