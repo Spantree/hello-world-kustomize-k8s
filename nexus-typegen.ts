@@ -484,6 +484,11 @@ export interface NexusGenFieldTypes {
     counterCount: number; // Int!
     counters: NexusGenRootTypes['Counter'][]; // [Counter!]!
     firstCounter: NexusGenRootTypes['Counter'] | null; // Counter
+    systemInfo: NexusGenRootTypes['SystemInfo'] | null; // SystemInfo
+  }
+  SystemInfo: { // field return type
+    databaseType: string | null; // String
+    env: NexusGenScalars['Json'] | null; // Json
   }
 }
 
@@ -550,6 +555,9 @@ export interface NexusGenFieldTypeNames {
     firstCounter: 'Counter'
     systemInfo: 'SystemInfo'
   }
+  SystemInfo: { // field return type name
+    databaseType: 'String'
+    env: 'Json'
   }
 }
 

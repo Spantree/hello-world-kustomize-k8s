@@ -1,0 +1,9 @@
+fragment SystemInfoData on SystemInfo {
+  databaseType
+}
+
+query GetSystemInfo {
+  systemInfo {
+    ...SystemInfoData
+  }
+}
