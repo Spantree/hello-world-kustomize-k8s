@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 
 import { CounterDataFragment, useCreateNewCounterMutation, useIncrementCounterMutation } from 'generated';
+import { CreateNewCounterPanel } from './CreateNewCounterPanel';
 
 interface Props {
   counters: Array<CounterDataFragment>;
 }
 
 export const CounterTable: React.FC<Props> = ({ counters }) => {
-  const [incrementCounter, { data, loading, error }] = useIncrementCounterMutation();
+  const [createMode, setCreateMode] = useState(false);
+  const [incrementCounter] = useIncrementCounterMutation();
   return (
     <div className="flex flex-col">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 w-2xl">
@@ -61,14 +63,22 @@ export const CounterTable: React.FC<Props> = ({ counters }) => {
           </div>
         </div>
       </div>
-      <div className="ml-4 mt-8 flex-shrink-0 items-center justify-center w-full flex">
+      <div className="mt-8 flex-shrink-0 items-center justify-center w-full flex">
         {/* TODO: Implement Create New Counter Mutation */}
-        <button
-          type="button"
-          className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        >
-          Create new counter
-        </button>
+        {!createMode ? (
+          <button
+            type="button"
+            className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            onClick={(e) => {
+              e.preventDefault();
+              setCreateMode(true);
+            }}
+          >
+            Create new counter
+          </button>
+        ) : (
+          <CreateNewCounterPanel setActive={setCreateMode} />
+        )}
       </div>
     </div>
   );
