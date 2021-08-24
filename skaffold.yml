@@ -6,8 +6,6 @@ build:
       context: .
   tagPolicy:
     sha256: {}
-    customTemplate:
-      template: '0.1.0'
   local:
     push: true
 # deploy:
