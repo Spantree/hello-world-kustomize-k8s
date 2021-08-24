@@ -6,10 +6,10 @@ build:
       context: .
   tagPolicy:
     customTemplate:
-      template: '0.1.2-SNAPSHOT'
+      template: '0.1.3-SNAPSHOT'
   local:
     push: true
 deploy:
   kustomize:
     paths:
-      - ./kustomize/base
+      - ./k8s/overlays/dev

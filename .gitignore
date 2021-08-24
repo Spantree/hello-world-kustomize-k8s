@@ -38,3 +38,6 @@ _
 
 client
 *.dump
+
+#SQLite
+dev.db
