@@ -13,13 +13,13 @@ spec:
         deployment: hello-world
     spec:
       containers:
-      - name: hello-world
-        image: spantree/hello-world-kustomize-k8s:latest
-        ports:
-        - containerPort: 3000
-        env:
-        - name: GREETING
-          valueFrom:
-            configMapKeyRef:
-              name: hello-world-config
-              key: greeting
+        - name: hello-world
+          image: spantree/hello-world-kustomize-k8s:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: GREETING
+              valueFrom:
+                configMapKeyRef:
+                  name: hello-world-config
+                  key: greeting
