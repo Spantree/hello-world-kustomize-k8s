@@ -1,15 +1,22 @@
 import { PrismaClient } from '@prisma/client';
+import pino from 'pino';
 
 const prisma = new PrismaClient();
+const log = pino({ prettyPrint: true });
+
+const counterNames = ['The first counter'];
 
 const seed = async () => {
-  await prisma.counter.create({ data: { name: 'The First Counter' } });
+  for (const name of counterNames) {
+    const result = await prisma.counter.upsert({ where: { name }, create: { name }, update: {} });
+    log.info(result, `Upserted counter with name '${name}'`);
+  }
 };
 
 seed()
-  .catch((e) => {
+  .catch((error) => {
     // eslint-disable-next-line no-console
-    console.error(e);
+    log.error(error, 'An error occurred seeding data');
     process.exit(1);
   })
   .finally(async () => {
