@@ -4,7 +4,6 @@ services:
     build: .
     environment:
       DATABASE_TYPE: SQLite
+      GREETING: 'Hello from Docker Compose!'
     ports:
       - '3000:3000'
-    volumes:
-      - '.'
