@@ -1,9 +1,7 @@
 import * as React from 'react';
-import { useRouter } from 'next/router';
 import { useGetCountersQuery } from 'generated';
 
 const Index = () => {
-  const router = useRouter();
   const { data, loading, error } = useGetCountersQuery();
   if (loading) {
     return <div className="w-full flex items-start justify-center">Loading...</div>;
@@ -58,7 +56,7 @@ const Index = () => {
                     <tbody>
                       {counters.map(({ id, name, value }, counterIdx) => (
                         <tr key={id} className={counterIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{name}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium tgit ext-gray-900">{name}</td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{value}</td>
                           <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             {/* TODO: Implement Increment Mutation */}
