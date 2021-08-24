@@ -1,0 +1,16 @@
+apiVersion: skaffold/v2beta8
+kind: Config
+build:
+  artifacts:
+    - image: spantree/hello-world-kustomize-k8s
+      context: .
+  tagPolicy:
+    sha256: {}
+    customTemplate:
+      template: '0.1.0'
+  local:
+    push: true
+# deploy:
+#   kustomize:
+#     paths:
+#       - ./kustomize/base
