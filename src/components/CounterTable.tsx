@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { CounterDataFragment, useCreateNewCounterMutation, useIncrementCounterMutation } from 'generated';
+import { CounterDataFragment, useIncrementCounterMutation } from 'generated';
 import { CreateNewCounterPanel } from './CreateNewCounterPanel';
 
 interface Props {
@@ -44,7 +44,6 @@ export const CounterTable: React.FC<Props> = ({ counters }) => {
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium tgit ext-gray-900">{name}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{value}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      {/* TODO: Implement Increment Mutation */}
                       <a
                         href="#"
                         onClick={(e) => {
@@ -64,7 +63,7 @@ export const CounterTable: React.FC<Props> = ({ counters }) => {
         </div>
       </div>
       <div className="mt-8 flex-shrink-0 items-center justify-center w-full flex">
-        {/* TODO: Implement Create New Counter Mutation */}
+        {/* TODO: Add Form Validation to avoid empty name value */}
         {!createMode ? (
           <button
             type="button"
