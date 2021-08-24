@@ -489,6 +489,7 @@ export type SystemInfo = {
   __typename?: 'SystemInfo';
   databaseType?: Maybe<Scalars['String']>;
   env?: Maybe<Scalars['Json']>;
+  greeting?: Maybe<Scalars['String']>;
 };
 
 export type CounterDataFragment = { __typename?: 'Counter', id: string, name: string, value: any, createdAt: any, updatedAt: any };
@@ -512,12 +513,12 @@ export type IncrementCounterMutationVariables = Exact<{
 
 export type IncrementCounterMutation = { __typename?: 'Mutation', incrementCounter?: Maybe<{ __typename?: 'Counter', id: string, name: string, value: any, createdAt: any, updatedAt: any }> };
 
-export type SystemInfoDataFragment = { __typename?: 'SystemInfo', databaseType?: Maybe<string> };
+export type SystemInfoDataFragment = { __typename?: 'SystemInfo', databaseType?: Maybe<string>, greeting?: Maybe<string> };
 
 export type GetSystemInfoQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetSystemInfoQuery = { __typename?: 'Query', systemInfo?: Maybe<{ __typename?: 'SystemInfo', databaseType?: Maybe<string> }> };
+export type GetSystemInfoQuery = { __typename?: 'Query', systemInfo?: Maybe<{ __typename?: 'SystemInfo', databaseType?: Maybe<string>, greeting?: Maybe<string> }> };
 
 export const CounterDataFragmentDoc = gql`
     fragment CounterData on Counter {
@@ -531,6 +532,7 @@ export const CounterDataFragmentDoc = gql`
 export const SystemInfoDataFragmentDoc = gql`
     fragment SystemInfoData on SystemInfo {
   databaseType
+  greeting
 }
     `;
 export const GetAllCountersDocument = gql`

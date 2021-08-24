@@ -1,5 +1,6 @@
 fragment SystemInfoData on SystemInfo {
   databaseType
+  greeting
 }
 
 query GetSystemInfo {

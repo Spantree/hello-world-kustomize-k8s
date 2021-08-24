@@ -410,6 +410,7 @@ export interface NexusGenObjects {
   SystemInfo: { // root type
     databaseType?: string | null; // String
     env?: NexusGenScalars['Json'] | null; // Json
+    greeting?: string | null; // String
   }
 }
 
@@ -489,6 +490,7 @@ export interface NexusGenFieldTypes {
   SystemInfo: { // field return type
     databaseType: string | null; // String
     env: NexusGenScalars['Json'] | null; // Json
+    greeting: string | null; // String
   }
 }
 
@@ -558,6 +560,7 @@ export interface NexusGenFieldTypeNames {
   SystemInfo: { // field return type name
     databaseType: 'String'
     env: 'Json'
+    greeting: 'String'
   }
 }
 

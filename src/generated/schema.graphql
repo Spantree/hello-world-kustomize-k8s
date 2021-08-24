@@ -411,4 +411,5 @@ input StringWithAggregatesFilter {
 type SystemInfo {
   databaseType: String
   env: Json
+  greeting: String
 }
