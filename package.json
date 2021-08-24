@@ -1,8 +1,13 @@
 {
   "name": "hello-world-kustomize-k8s",
-  "version": "0.1.0",
-  "author": "Spantree <hello@spantree.net>",
-  "license": "MIT",
+  "version": "0.1.1",
+  "author": "Spantree LLC <hello@spantree.net>",
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "https://opensource.org/licenses/apache2.0"
+    }
+  ],
   "scripts": {
     "dev": "dotenv -f .env.development -- next",
     "build": "next build",

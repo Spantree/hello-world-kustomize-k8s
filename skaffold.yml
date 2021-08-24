@@ -5,7 +5,8 @@ build:
     - image: spantree/hello-world-kustomize-k8s
       context: .
   tagPolicy:
-    sha256: {}
+    customTemplate:
+      template: '0.1.1'
   local:
     push: true
 # deploy:
