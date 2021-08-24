@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { CounterDataFragment } from 'generated';
+import { CounterDataFragment, useCreateNewCounterMutation, useIncrementCounterMutation } from 'generated';
 
 interface Props {
   counters: Array<CounterDataFragment>;
 }
 
 export const CounterTable: React.FC<Props> = ({ counters }) => {
+  const [incrementCounter, { data, loading, error }] = useIncrementCounterMutation();
   return (
     <div className="flex flex-col">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 w-2xl">
@@ -42,7 +43,14 @@ export const CounterTable: React.FC<Props> = ({ counters }) => {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{value}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       {/* TODO: Implement Increment Mutation */}
-                      <a href="#" className="text-indigo-600 hover:text-indigo-900">
+                      <a
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          incrementCounter({ variables: { id } });
+                        }}
+                        className="text-indigo-600 hover:text-indigo-900"
+                      >
                         Increment
                       </a>
                     </td>

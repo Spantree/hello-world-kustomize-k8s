@@ -268,7 +268,7 @@ export type MutationCreateCounterArgs = {
 
 
 export type MutationIncrementCounterArgs = {
-  id?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
 };
 
 export type NestedBigIntFilter = {
@@ -488,6 +488,7 @@ export type StringWithAggregatesFilter = {
 export type SystemInfo = {
   __typename?: 'SystemInfo';
   databaseType?: Maybe<Scalars['String']>;
+  env?: Maybe<Scalars['Json']>;
 };
 
 export type CounterDataFragment = { __typename?: 'Counter', id: string, name: string, value: any, createdAt: any, updatedAt: any };
