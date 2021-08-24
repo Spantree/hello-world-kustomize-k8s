@@ -5,7 +5,7 @@ resources:
 images:
   - name: 'spantree/hello-world-kustomize-k8s'
     newName: 'spantree/hello-world-kustomize-k8s'
-    newTag: '2.0'
+    newTag: '0.1.1'
 namespace: hello-world
 namePrefix: dev-
 patchesStrategicMerge:
