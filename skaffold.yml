@@ -6,7 +6,7 @@ build:
       context: .
   tagPolicy:
     customTemplate:
-      template: '0.1.2-SNAPSHOT'
+      template: '0.1.2'
   local:
     push: true
 deploy:

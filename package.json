@@ -1,6 +1,6 @@
 {
   "name": "hello-world-kustomize-k8s",
-  "version": "0.1.2-SNAPSHOT",
+  "version": "0.1.2",
   "author": "Spantree LLC <hello@spantree.net>",
   "licenses": [
     {
