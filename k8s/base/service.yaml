@@ -2,9 +2,13 @@ kind: Service
 apiVersion: v1
 metadata:
   name: hello-world-service
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: external
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
+    service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
 spec:
   selector:
-    deployment: hello
+    deployment: hello-world
   type: LoadBalancer
   ports:
     - protocol: TCP

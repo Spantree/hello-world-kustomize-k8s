@@ -1,0 +1,8 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: hello-world-service
+spec:
+  selector:
+    deployment: dev-hello-world
+  type: LoadBalancer

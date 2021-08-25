@@ -6,3 +6,5 @@ namespace: hello-world
 namePrefix: dev-
 patchesStrategicMerge:
   - map.yaml
+  - dep.yaml
+  - svc.yaml
