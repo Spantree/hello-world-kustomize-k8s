@@ -3,6 +3,5 @@ kind: ConfigMap
 metadata:
   name: hello-world-config
 data:
-  greeting: 'Good Morning!'
+  greeting: 'Hello from k8s base environment!'
   dbtype: 'SQLite'
-  
