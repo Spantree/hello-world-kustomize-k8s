@@ -27,7 +27,7 @@ now run
 ## To run the app inside a local Docker engine
 
 ```shell
-docker-compose up
+> docker-compose up
 ```
 
 ## To build the Docker container
@@ -35,13 +35,13 @@ docker-compose up
 Via Docker Compose:
 
 ```shell
-docker-compose build
+> docker-compose build
 ```
 
 Via Skaffold:
 
 ```shell
-skaffold build --tag='hello-world-kustomize-k8s-local'
+> skaffold build --tag='hello-world-kustomize-k8s-local'
 ```
 
 ## To deploy to K8s cluster
