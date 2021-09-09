@@ -24,6 +24,26 @@ now run
 
 `Good work`
 
+## To run the app inside a local Docker engine
+
+```shell
+docker-compose up
+```
+
+## To build the Docker container
+
+Via Docker Compose:
+
+```shell
+docker-compose build
+```
+
+Via Skaffold:
+
+```shell
+skaffold build --tag='hello-world-kustomize-k8s-local'
+```
+
 ## To deploy to K8s cluster
 
 ```shell
